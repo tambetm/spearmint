@@ -128,6 +128,15 @@ def run_python_job(job):
 
     # Load up this module and run
     module  = __import__(job.name)
+
+    # do it in a way that works for submodules
+    def my_import(name):
+        m = __import__(name)
+        for n in name.split(".")[1:]:
+            m = getattr(m, n)
+        return m
+    module = my_import(job.name)
+
     result = module.main(job.id, params)
 
     log("Got result %f\n" % (result))
