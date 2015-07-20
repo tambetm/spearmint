@@ -126,7 +126,7 @@ def get_available_port(portnum):
 def start_web_view(options, experiment_config, chooser):
     '''Start the web view in a separate process.'''
 
-    from spearmint.web.app import app    
+    from web.app import app    
     port = get_available_port(options.web_status_port)
     print "Using port: " + str(port)
     if options.web_status_host:
